@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>experiment-type</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Just an experiment to make silly text styles with vanilla javascript" />
+	<meta name="author" content="Chris Dickow">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<style type="text/css">
+body{
+	font-family: 'Open Sans', sans-serif;
+	color: #666;
+}
+h1{
+	color: #d3d3d3;
+	opacity: 1;
+	font-size: 60px;
+	font-family: "Verdana", sans-serif;
+	letter-spacing: -4px;
+	transition: all 600ms ease;
+	-webkit-transition: all 600ms ease;
+	-moz-transition: all 600ms ease;
+	-o-transition: all 600ms ease;
+}
+h3{
+	margin-top: -40px;
+	font-size: 30px;
+	color: #d3d3d3;
+	transition: all 600ms ease;
+	-webkit-transition: all 600ms ease;
+	-moz-transition: all 600ms ease;
+	-o-transition: all 600ms ease;
+}
+h1:before, h3:before, p:before{
+	content: attr(data-content);
+}
+.wrapper{
+	max-width: 700px;
+	width: 80%;
+	margin: 10% auto;
+	transition: all 600ms ease;
+	-webkit-transition: all 600ms ease;
+	-moz-transition: all 600ms ease;
+	-o-transition: all 600ms ease;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+	<h1 id="foo" data-content></h1>
+	<h3 id="bar" data-content></h3>
+	<p id="description" data-content></p>
+</div>
+<script type="text/javascript">
+(function(){
+	// string, el ID, final color
+	setData("Houston:", "foo", "#333");
+	setData("We're out of chips", "bar", "#f00");
+	setData("This was just an experiment to make silly text styles with vanilla javascript.", "description", "#666");
+})();
+function setData(name, id, finalColor){
+	var name = name;;
+	var displayName = "";
+	var nameArray = name.split("");
+	var el = document.getElementById(id);
+	for(i=0; i < nameArray.length; i++){
+		(function(i){
+			el.style.opacity = 0;
+			setTimeout(function(){
+				displayName += nameArray[i];
+				el.setAttribute('data-content', displayName);
+				el.style.opacity = 1;
+				if(i == nameArray.length -1){
+					el.style.color = finalColor;
+				}
+			}, 30 * i);
+		}(i));
+	}
+}
+</script>
+</body>
+</html>
